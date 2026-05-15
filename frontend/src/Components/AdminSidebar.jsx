@@ -43,9 +43,14 @@ const AdminSidebar = () => {
           Analytics
         </NavLink>
 
+        <NavLink to="/admin-dashboard/workers" style={linkStyle}>
+          Field Workers
+        </NavLink>
+
         <NavLink to="/admin-dashboard/ai-summary" style={linkStyle}>
           AI Summary
         </NavLink>
+
       </nav>
     </aside>
   );

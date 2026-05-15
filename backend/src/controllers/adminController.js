@@ -1,5 +1,5 @@
 import Report from "../models/ReportModel.js";
-
+import User from "../models/UserModel.js";
 
 // GET ALL REPORTS
 export const getAllReports = async (req, res) => {
@@ -56,4 +56,30 @@ export const getDashboardStats = async (req, res) => {
     });
 
   }
+};
+
+export const getAllFieldWorkers =
+  async (req, res) => {
+
+    try {
+      console.log("Fetching field workers...");
+
+      const workers =
+        await User.find({
+          role: "fieldworker",
+        });
+      console.log(workers);
+
+      res.status(200).json(workers);
+
+    } catch (error) {
+
+      console.log(error);
+
+      res.status(500).json({
+        message:
+          "Failed to fetch workers",
+        error: error.message,
+      });
+    }
 };

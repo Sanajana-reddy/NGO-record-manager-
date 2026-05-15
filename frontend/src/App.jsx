@@ -10,6 +10,7 @@ import AdminOverview from "./Pages/admin/AdminOverview";
 import AllReports from "./Pages/admin/AllReports";
 import Analytics from "./Pages/admin/Analytics";
 import AISummary from "./Pages/admin/AISummary";
+import FieldWorkers from "./Pages/admin/FieldWorkers";
 
 import ProtectedAdminRoute from "./Components/ProtectedAdminRoute";
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="reports" element={<AllReports />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="ai-summary" element={<AISummary />} />
+          <Route path="workers" element={<FieldWorkers />} />
         </Route>
       </Routes>
     </BrowserRouter>
