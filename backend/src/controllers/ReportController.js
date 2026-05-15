@@ -44,8 +44,9 @@ export const createReport = async (req, res) => {
 export const getReports = async (req, res) => {
   try {
 
-    const reports = await Report.find()
-      .populate("workerId", "name email region")
+    const reports = await Report.find({
+      workerId: req.user.id,
+    })
       .sort({ createdAt: -1 });
 
     res.status(200).json(reports);

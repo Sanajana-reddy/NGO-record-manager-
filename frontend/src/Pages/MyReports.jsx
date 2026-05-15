@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../Services/api";
 
 const MyReports = () => {
 
@@ -9,16 +9,7 @@ const MyReports = () => {
 
     try {
 
-      const token = localStorage.getItem("token");
-
-      const res = await axios.get(
-        "http://localhost:5000/api/reports",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await API.get("/api/reports");
 
       setReports(res.data);
 
@@ -30,6 +21,8 @@ const MyReports = () => {
   };
 
   useEffect(() => {
+    // Data is loaded from the backend once when this route mounts.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchReports();
   }, []);
 

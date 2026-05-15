@@ -1,12 +1,26 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import "@mantine/core/styles.css";
+import "@mantine/charts/styles.css";
 
 import App from "./App";
 
+import { MantineProvider } from "@mantine/core";
+
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <GoogleOAuthProvider clientId="447326230913-177b8m0lsf30f04m4lc04c6n0dq58g8i.apps.googleusercontent.com">
-    <App />
-  </GoogleOAuthProvider>
+
+  <MantineProvider withGlobalStyles withNormalizeCSS>
+
+    <GoogleOAuthProvider
+      clientId={
+        import.meta.env.VITE_GOOGLE_CLIENT_ID
+      }
+    >
+
+      <App />
+
+    </GoogleOAuthProvider>
+
+  </MantineProvider>
 );

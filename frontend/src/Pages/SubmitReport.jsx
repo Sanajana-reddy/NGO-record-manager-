@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import API from "../Services/api";
 
 const SubmitReport = () => {
 
@@ -27,17 +27,7 @@ const SubmitReport = () => {
 
     try {
 
-      const token = localStorage.getItem("token");
-
-      const res = await axios.post(
-        "http://localhost:5000/api/reports",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await API.post("/api/reports", formData);
 
       alert("Report Submitted");
 
