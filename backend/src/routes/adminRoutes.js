@@ -5,6 +5,7 @@ import {
   getDashboardStats,
   getAllFieldWorkers
 } from "../controllers/adminController.js";
+import { getAISummary } from "../controllers/aiSummaryController.js";
 
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -32,6 +33,13 @@ router.get(
   verifyToken,
   verifyAdmin,
   getAllFieldWorkers
+);
+
+router.get(
+  "/ai-summary",
+  verifyToken,
+  verifyAdmin,
+  getAISummary
 );
 
 export default router;

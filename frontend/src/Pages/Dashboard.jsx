@@ -121,7 +121,7 @@ const Dashboard = () => {
               <Table.Tr>
                 <Table.Th style={{ width: "35%" }}>Activity</Table.Th>
                 <Table.Th style={{ width: "25%" }}>Region</Table.Th>
-                <Table.Th style={{ width: "20%", textAlign: "center" }}>Attendance</Table.Th>
+              
                 <Table.Th style={{ width: "20%", textAlign: "right" }}>Date</Table.Th>
               </Table.Tr>
             </Table.Thead>
@@ -141,9 +141,7 @@ const Dashboard = () => {
                       <Text fw={600}>{report.activityType || "N/A"}</Text>
                     </Table.Td>
                     <Table.Td>{report.region || "N/A"}</Table.Td>
-                    <Table.Td style={{ textAlign: "center" }}>
-                      {report.attendance != null ? `${report.attendance}%` : "-"}
-                    </Table.Td>
+                    
                     <Table.Td style={{ textAlign: "right" }}>
                       {report.createdAt ? new Date(report.createdAt).toLocaleDateString() : "-"}
                     </Table.Td>

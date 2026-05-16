@@ -87,15 +87,7 @@ const Login = () => {
               )}
             </Center>
 
-            <Card shadow="sm" radius="sm" p="md" withBorder>
-              <Title order={4}>Features</Title>
-              <Stack spacing="xs" mt="sm">
-                <Text>• Field worker reports</Text>
-                <Text>• Analytics dashboard</Text>
-                <Text>• AI insights</Text>
-                <Text>• Centralized data</Text>
-              </Stack>
-            </Card>
+           
 
           </Stack>
         </Card>
