@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 
-import {
-Card,
-Text,
-Title,
-SimpleGrid,
-} from "@mantine/core";
+import {Table,Avatar,Badge,Group,Paper,Text,Title,} from "@mantine/core";
 
 import API from "../../Services/api.js";
 
@@ -43,49 +38,148 @@ fetchWorkers();
 }, []);
 
 return (
-<div>
 
-  <Title order={2} mb={30}>
-    Field Workers
-  </Title>
+  <div>
 
-  <SimpleGrid cols={3}>
+
+<Title order={1} mb={5}>
+  Field Workers
+</Title>
+
+<Text c="dimmed" mb={30}>
+  Manage field personnel and
+  view their activity.
+</Text>
+
+<Paper
+  shadow="sm"
+  radius="lg"
+  p="lg"
+  withBorder
+>
+
+  <Table
+    highlightOnHover
+    verticalSpacing="md"
+  >
+
+    <Table.Thead>
+
+      <Table.Tr>
+
+        <Table.Th>
+          Field Worker
+        </Table.Th>
+
+        <Table.Th>
+          Primary Region
+        </Table.Th>
+
+        <Table.Th>
+          Status
+        </Table.Th>
+
+        <Table.Th>
+          Joined
+        </Table.Th>
+
+      </Table.Tr>
+
+    </Table.Thead>
+
+    <Table.Tbody>
+
+      {
+        workers.map((worker) => (
+
+          <Table.Tr
+            key={worker._id}
+          >
+
+            <Table.Td>
+
+             <Group>
+
+  <Avatar
+    color="orange"
+    radius="xl"
+  >
 
     {
-      workers.map((worker) => (
-
-        <Card
-          key={worker._id}
-          shadow="sm"
-          padding="lg"
-          radius="md"
-          withBorder
-        >
-
-          <Title order={4} mb={10}>
-            {worker.name}
-          </Title>
-
-          <Text>
-            Email:
-            {worker.email}
-          </Text>
-
-          <Text>
-            Role:
-            {worker.role}
-          </Text>
-
-        </Card>
-      ))
+      worker.name
+        ?.split(" ")
+        .map((word) =>
+          word[0]
+        )
+        .join("")
     }
 
-  </SimpleGrid>
+  </Avatar>
 
-</div>
+  <div>
+
+    <Text fw={600}>
+      {worker.name}
+    </Text>
+
+    <Text
+      size="sm"
+      c="dimmed"
+    >
+      {worker.email}
+    </Text>
+
+  </div>
+
+</Group>
+
+            </Table.Td>
+
+            <Table.Td>
+
+              {
+                worker.region ||
+                "Not Assigned"
+              }
+
+            </Table.Td>
+
+            <Table.Td>
+
+              <Badge
+  color="green"
+  variant="light"
+>
+
+  Active
+
+</Badge>
+
+            </Table.Td>
+
+            <Table.Td>
+
+              {
+  new Date(
+    worker.createdAt
+  ).toLocaleDateString()
+}
+
+            </Table.Td>
+
+          </Table.Tr>
+        ))
+      }
+
+    </Table.Tbody>
+
+  </Table>
+
+</Paper>
 
 
+  </div>
 );
-};
 
+};
 export default FieldWorkers;

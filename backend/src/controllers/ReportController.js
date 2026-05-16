@@ -1,4 +1,5 @@
-import Report from "../models/reportModel.js";
+import Report from "../models/ReportModel.js";
+import mongoose from "mongoose";
 
 
 // CREATE REPORT
@@ -57,5 +58,62 @@ export const getReports = async (req, res) => {
       message: error.message,
     });
 
+  }
+};
+
+export const updateReport = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const report = await Report.findById(id);
+    if (!report) return res.status(404).json({ message: "Report not found" });
+
+    if (req.user.role !== "admin" && report.workerId.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Not authorized to update" });
+    }
+
+    const updated = await Report.findByIdAndUpdate(id, req.body, { new: true });
+    res.status(200).json(updated);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const deleteReport = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const report = await Report.findById(id);
+    if (!report) return res.status(404).json({ message: "Report not found" });
+
+    if (req.user.role !== "admin" && report.workerId.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Not authorized to delete" });
+    }
+
+    await Report.findByIdAndDelete(id);
+    res.status(200).json({ message: "Report deleted" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getReportDates = async (req, res) => {
+  try {
+    const workerId = req.user.id;
+    const dates = await Report.aggregate([
+      { $match: { workerId: mongoose.Types.ObjectId(workerId) } },
+      {
+        $group: {
+          _id: {
+            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      { $project: { date: "$_id", count: 1, _id: 0 } },
+      { $sort: { date: 1 } },
+    ]);
+
+    res.status(200).json(dates);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

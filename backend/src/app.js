@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/AuthRoutes.js";
 import reportRoutes from "./routes/ReportRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import beneficiaryRoutes from "./routes/BeneficiaryRoutes.js";
 
 dotenv.config();
 
@@ -18,6 +19,10 @@ app.use("/api/admin", adminRoutes);
 app.get("/", (req, res) => {
   res.send("NGO Dashboard API Running");
 });
+app.use(
+  "/api/beneficiaries",
+  beneficiaryRoutes
+);
 
 mongoose
   .connect(process.env.MONGO_URI)

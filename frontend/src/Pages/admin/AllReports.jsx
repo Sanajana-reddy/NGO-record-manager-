@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 
-import {
-Card,
-Text,
-Title,
-SimpleGrid,
-TextInput,
-} from "@mantine/core";
+import { Card, Text, Title, SimpleGrid, TextInput, Table, Button, Group, ScrollArea } from "@mantine/core";
 
 import API from "../../Services/api";
 
@@ -138,60 +132,77 @@ return (
 
 
 
-  {
-    filteredReports.map((report) => (
+  <ScrollArea>
+    <Table highlightOnHover verticalSpacing="md">
+      <Table.Thead>
+        <Table.Tr>
+          <Table.Th>Worker</Table.Th>
+          <Table.Th>Activity</Table.Th>
+          <Table.Th>Region</Table.Th>
+          <Table.Th>Beneficiaries</Table.Th>
+         
+          <Table.Th>Issues</Table.Th>
+          <Table.Th>Description</Table.Th>
+          <Table.Th>Actions</Table.Th>
+        </Table.Tr>
+      </Table.Thead>
 
-      <Card
-        key={report._id}
-        shadow="sm"
-        padding="lg"
-        radius="md"
-        withBorder
-        mb={20}
-      >
+      <Table.Tbody>
+        {filteredReports.map((report) => (
+          <Table.Tr key={report._id}>
+            <Table.Td>{report.workerId?.name}</Table.Td>
+            <Table.Td>{report.activityType}</Table.Td>
+            <Table.Td>{report.region}</Table.Td>
+            <Table.Td>{report.beneficiariesCount}</Table.Td>
+            
+            <Table.Td>{report.issues}</Table.Td>
+            <Table.Td>{report.description}</Table.Td>
+            <Table.Td>
+              <Group spacing="xs">
+                <Button
+                  size="xs"
+                  variant="outline"
+                  onClick={async () => {
+                    const newDesc = window.prompt("Edit description", report.description || "");
+                    if (newDesc !== null) {
+                      try {
+                        await API.put(`/api/reports/${report._id}`, { description: newDesc });
+                        window.location.reload();
+                      } catch (err) {
+                        console.error(err);
+                        alert("Failed to update report");
+                      }
+                    }
+                  }}
+                >
+                  Edit
+                </Button>
 
-        <Title order={4} mb={10}>
-          {report.activityType}
-        </Title>
-
-        <Text>
-          Worker:
-          {report.workerId?.name}
-        </Text>
-
-        <Text>
-          Email:
-          {report.workerId?.email}
-        </Text>
-
-        <Text>
-          Region:
-          {report.region}
-        </Text>
-
-        <Text>
-          Beneficiaries:
-          {report.beneficiariesCount}
-        </Text>
-
-        <Text>
-          Attendance:
-          {report.attendance}
-        </Text>
-
-        <Text>
-          Issues:
-          {report.issues}
-        </Text>
-
-        <Text>
-          Description:
-          {report.description}
-        </Text>
-
-      </Card>
-    ))
-  }
+                <Button
+                  size="xs"
+                  color="red"
+                  variant="outline"
+                  onClick={async () => {
+                    if (window.confirm("Delete this report?")) {
+                      try {
+                        await API.delete(`/api/reports/${report._id}`);
+                        window.location.reload();
+                      } catch (err) {
+                        console.error(err);
+                        alert("Failed to delete report");
+                      }
+                    }
+                  }}
+                >
+                  Delete
+                </Button>
+              </Group>
+            </Table.Td>
+          </Table.Tr>
+        ))}
+      </Table.Tbody>
+    </Table>
+  </ScrollArea>
 
 </div>
 

@@ -72,14 +72,7 @@ const SubmitReport = () => {
           onChange={handleChange}
         />
 
-        <br /><br />
-
-        <input
-          type="number"
-          name="attendance"
-          placeholder="Attendance"
-          onChange={handleChange}
-        />
+        
 
         <br /><br />
 

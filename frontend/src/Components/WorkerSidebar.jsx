@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const AdminSidebar = () => {
+const WorkerSidebar = () => {
   const linkStyle = ({ isActive }) => ({
     color: isActive ? "#1971c2" : "#212529",
     fontWeight: isActive ? 700 : 500,
@@ -21,7 +21,7 @@ const AdminSidebar = () => {
         flexShrink: 0,
       }}
     >
-      <h2 style={{ margin: 0 }}>NGO Admin</h2>
+      <h2 style={{ margin: 0 }}>Worker Portal</h2>
 
       <nav
         style={{
@@ -31,33 +31,28 @@ const AdminSidebar = () => {
           marginTop: "30px",
         }}
       >
-        <NavLink to="/admin-dashboard" end style={linkStyle}>
-          Overview
+        <NavLink to="/dashboard" end style={linkStyle}>
+          Dashboard
         </NavLink>
 
-        <NavLink to="/admin-dashboard/reports" style={linkStyle}>
-          Reports
+        <NavLink to="/dashboard/profile" style={linkStyle}>
+          Profile
         </NavLink>
 
-        <NavLink to="/admin-dashboard/analytics" style={linkStyle}>
-          Analytics
+        <NavLink to="/dashboard/submit-report" style={linkStyle}>
+          Submit Report
         </NavLink>
 
-        <NavLink to="/admin-dashboard/workers" style={linkStyle}>
-          Field Workers
+        <NavLink to="/dashboard/my-reports" style={linkStyle}>
+          View My Reports
         </NavLink>
 
-        <NavLink to="/admin-dashboard/beneficiaries" style={linkStyle}>
-          Beneficiaries
+        <NavLink to="/dashboard/beneficiaries" style={linkStyle}>
+          Add Beneficiaries
         </NavLink>
-
-        <NavLink to="/admin-dashboard/ai-summary" style={linkStyle}>
-          AI Summary
-        </NavLink>
-
       </nav>
     </aside>
   );
 };
 
-export default AdminSidebar;
+export default WorkerSidebar;
