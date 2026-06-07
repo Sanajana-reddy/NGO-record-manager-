@@ -6,7 +6,7 @@ import {
   updateReport,
   deleteReport,
   getReportDates,
-} from "../controllers/reportController.js";
+} from "../controllers/ReportController.js";
 
 import { protect } from "../middleware/authMiddleware.js";
 
