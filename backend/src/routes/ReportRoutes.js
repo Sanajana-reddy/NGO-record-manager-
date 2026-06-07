@@ -8,7 +8,7 @@ import {
   getReportDates,
 } from "../controllers/ReportController.js";
 
-import { protect } from "../middleware/authMiddleware.js";
+import { protect } from "../middleware/AuthMiddleware.js";
 
 const router = express.Router();
 
