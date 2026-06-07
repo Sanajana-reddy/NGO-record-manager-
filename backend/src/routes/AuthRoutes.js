@@ -4,7 +4,7 @@ import {
   googleLogin,
   getProfile,
   updateProfile,
-} from "../controllers/authController.js";
+} from "../controllers/AuthController.js";
 import { verifyToken } from "../middleware/AuthMiddleware.js";
 
 const router = express.Router();
