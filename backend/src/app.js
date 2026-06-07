@@ -33,7 +33,7 @@ app.use(
   beneficiaryRoutes
 );
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
-app.get("*", (req, res) => {
+app.get("*path", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
 
