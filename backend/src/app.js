@@ -28,15 +28,12 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/admin", adminRoutes);
-app.get("/", (req, res) => {
-  res.send("NGO Dashboard API Running");
-});
 app.use(
   "/api/beneficiaries",
   beneficiaryRoutes
 );
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
-app.get("/*name", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
 
