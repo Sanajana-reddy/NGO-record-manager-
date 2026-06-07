@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/AuthRoutes.js";
 import reportRoutes from "./routes/ReportRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
-import beneficiaryRoutes from "./routes/BeneficiaryRoutes.js";
+import beneficiaryRoutes from "./routes/beneficiaryRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
