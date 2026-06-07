@@ -7,9 +7,9 @@ import {
 } from "../controllers/adminController.js";
 import { getAISummary } from "../controllers/aiSummaryController.js";
 
-import { protect } from "../middleware/authMiddleware.js";
+import { protect } from "../middleware/AuthMiddleware.js";
 
-import { adminOnly } from "../middleware/adminMiddleware.js";
+import { adminOnly } from "../middleware/AdminMiddleware.js";
 import {verifyToken, verifyAdmin} from "../middleware/AuthMiddleware.js";
 
 const router = express.Router();
